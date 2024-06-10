@@ -1,0 +1,158 @@
+_schema-version: "3.1"
+ID: wipro
+description: A simple CAP project.
+version: 1.0.0
+modules:
+- name: wipro-srv
+  type: nodejs
+  path: gen/srv
+  requires:
+  - name: wipro-db
+  - name: uaa_wipro
+  provides:
+  - name: srv-api
+    properties:
+      srv-url: ${default-url}
+  parameters:
+    buildpack: nodejs_buildpack
+    readiness-health-check-http-endpoint: /health
+    readiness-health-check-type: http
+  build-parameters:
+    builder: npm
+- name: wipro-db-deployer
+  type: hdb
+  path: gen/db
+  requires:
+  - name: wipro-db
+  parameters:
+    buildpack: nodejs_buildpack
+- name: wipro-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: wipro-destination-service
+    parameters:
+      content-target: true
+  - name: wipro_html_repo_host
+    parameters:
+      service-key:
+        name: wipro_html_repo_host-key
+  - name: uaa_wipro
+    parameters:
+      service-key:
+        name: uaa_wipro-key
+  parameters:
+    content:
+      subaccount:
+        destinations:
+        - Name: processAutomation_wipro_html_repo_host
+          ServiceInstanceName: wipro-html5-app-host-service
+          ServiceKeyName: wipro_html_repo_host-key
+          sap.cloud.service: processAutomation
+        - Authentication: OAuth2UserTokenExchange
+          Name: processAutomation_uaa_wipro
+          ServiceInstanceName: wipro-xsuaa-service
+          ServiceKeyName: uaa_wipro-key
+          sap.cloud.service: processAutomation
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: wipro-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: wipro_html_repo_host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - processautomationworkflowuimodule.zip
+      name: processautomationworkflowuimodule
+      target-path: resources/
+    - artifacts:
+      - processautomationwipro.zip
+      name: processautomationwipro
+      target-path: resources/
+    - artifacts:
+      - wiproworkflowuimodule.zip
+      name: wiproworkflowuimodule
+      target-path: resources/
+- name: processautomationworkflowuimodule
+  type: html5
+  path: workflow-ui-module
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: processautomationwipro
+  type: html5
+  path: app/wipro
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: wiproworkflowuimodule
+  type: html5
+  path: workflow-ui-module
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: wipro-db
+  type: com.sap.xs.hdi-container
+  parameters:
+    service: hana
+    service-plan: hdi-shared
+- name: wipro-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        subaccount:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: wipro-destination-service
+    service-plan: lite
+  requires:
+  - name: srv-api
+- name: wipro_html_repo_host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: wipro-html5-app-host-service
+    service-plan: app-host
+- name: uaa_wipro
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: wipro-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
