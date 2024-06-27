@@ -18,6 +18,18 @@ sap.ui.define([
                 var oModel = new JSONModel(Device);
                 oModel.setDefaultBindingMode("OneWay");
                 return oModel;
-        }
+        },
+        createviewInfoModel: function () {
+            var jsonData = {
+                items: [
+                  { id: 1, quarter: "001", price: 10 },
+                  { id: 2, quarter: "002", price: 20 },
+                  { id: 3, quarter: "003", price: 30 }
+                ]
+              };
+            var oModel = new JSONModel(jsonData);
+            oModel.setDefaultBindingMode("TwoWay");
+            return oModel;
+    }
     };
 });
