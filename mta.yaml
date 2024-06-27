@@ -71,26 +71,12 @@ modules:
       name: processautomationworkflowuimodule
       target-path: resources/
     - artifacts:
-      - processautomationwipro.zip
-      name: processautomationwipro
-      target-path: resources/
-    - artifacts:
       - wiproworkflowuimodule.zip
       name: wiproworkflowuimodule
       target-path: resources/
 - name: processautomationworkflowuimodule
   type: html5
   path: workflow-ui-module
-  build-parameters:
-    build-result: dist
-    builder: custom
-    commands:
-    - npm install
-    - npm run build:cf
-    supported-platforms: []
-- name: processautomationwipro
-  type: html5
-  path: app/wipro
   build-parameters:
     build-result: dist
     builder: custom
