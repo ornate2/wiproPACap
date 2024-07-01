@@ -16,6 +16,7 @@
         "@sap/cds-dk": "^7",
         "@sap/eslint-plugin-cds": "^3",
         "@sap/ux-specification": "UI5-1.124",
+        "@ui5/cli": "^3.11.0",
         "eslint": "^9",
         "rimraf": "^5.0.5"
     },
@@ -31,7 +32,5 @@
             "db": "hana"
         }
     },
-    "sapux": [
-    
-    ]
+    "sapux": []
 }
