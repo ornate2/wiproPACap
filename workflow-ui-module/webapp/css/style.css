@@ -5,7 +5,9 @@
 .stretchTabBar .sapMITBText {
     text-align: center !important;
 }
-
+.sapMTableScroll {
+    overflow: hidden !important;
+  }
 .longTextClass {
     color: orange !important;
 }
@@ -21,6 +23,9 @@
 }
 .wrapper .sapMDialogScrollCont{
     text-align : center !important;
+}
+.sapUiTableVSb{
+    display: none !important;
 }
 .sapMBarPH {
     display: inline-flex !important;
