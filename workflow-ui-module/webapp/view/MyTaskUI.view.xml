@@ -1,9 +1,9 @@
 <mvc:View 
-    controllerName="wiprofrm.workflowuimodule.controller.MyTaskUI"
+    controllerName="wipro.workflowuimodule.controller.MyTaskUI"
     xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:l="sap.ui.layout"
     xmlns:f="sap.ui.layout.form" xmlns:core="sap.ui.core" xmlns:table="sap.ui.table" xmlns:ta="sap.ui.table"
     xmlns:form="sap.ui.layout.form" xmlns:smartForm="sap.ui.comp.smartform" xmlns:smartField="sap.ui.comp.smartfield"
-    xmlns="sap.m" xmlns:ui="sap.ui.table">
+    xmlns="sap.m" xmlns:ui="sap.ui.table" >
     
     <App id="app">
         <Page id="scroll" title="{i18n>title}">
@@ -26,33 +26,33 @@
                                     <Label text="Create Saving Form against" required="true"
                                         class="sapMLabelNoText" />
                                     <ComboBox id="Create_Saving" 
-                                        change="NewCompanyCodeChange" items="{/Employees}">
-                                        <core:Item key="{FirstName}" text="{FirstName}" />
+                                        change="NewCompanyCodeChange" items="">
+                                        <core:Item key="" text="" />
                                     </ComboBox>
                                     <Label text="Cluster" required="true"
                                         class="sapMLabelNoText" />
                                         <ComboBox id="Cluster" 
-                                        change="NewCompanyCodeChange" items="{/Employees}">
-                                        <core:Item key="{Address}" text="{Address}" />
+                                        change="NewCompanyCodeChange" items="">
+                                        <core:Item key="" text="" />
                                     </ComboBox>
                                     
                                     <Label text="PO No" required="true"
                                         class="sapMLabelNoText" />
-                                    <Input id="AssetTitleId" maxLength="50" value="4500428051" editable="true"></Input>
+                                    <Input id="AssetTitleId" maxLength="50" value="{PONumber}" editable="true"></Input>
                                     <Label text="PO Value with Currency" required="true"
                                         class="sapMLabelNoText" />
-                                    <Input id="Value_Currency" maxLength="50" value="1000"></Input>
+                                    <Input id="Value_Currency" maxLength="50" value="{POValue - POCurrency}"></Input>
                                         <Label text="Vendor Name" required="true"
                                         class="sapMLabelNoText" />
-                                    <Input id="Vendor_Name" value="1001005 SVT LTD" maxLength="50"></Input>
+                                    <Input id="Vendor_Name" value="{VendorName}" maxLength="50"></Input>
                                     <Label text="Vendor Code" required="true"
                                         class="sapMLabelNoText" />
-                                    <Input id="Vendor_Code" maxLength="50" value="1001005"></Input>
+                                    <Input id="Vendor_Code" maxLength="50" value="{Vendor}"></Input>
                                     <Label text="Category" required="true"
                                         class="sapMLabelNoText" />
                                         <ComboBox id="Category_" 
-                                        change="NewCompanyCodeChange" items="{/Employees}">
-                                        <core:Item key="{City}" text="{City}" />
+                                        change="NewCompanyCodeChange" items="">
+                                        <core:Item key="" text="" />
                                     </ComboBox>
                         <Label text="Project Description"
                                         class="sapMLabelNoText" />
@@ -66,19 +66,19 @@
 
                                     <Label text="Saving Start Date"
                                         class="sapMLabelNoText" />
-                                    <DatePicker displayFormat="dd-MMM-yyyy"
-                                        valueFormat="yyyy-MM-ddT00:00:00" id="Saving_start">
+                                    <DatePicker displayFormat="dd-MMM-yyyy" placeholder="Starting Date" value="{StartDate}"
+                                        valueFormat="dd-MM-yyyy" id="Saving_start" change="handleChangeStart">
                                     </DatePicker>
                                     <Label text="Saving End Date"
                                         class="sapMLabelNoText" />
-                                    <DatePicker displayFormat="dd-MMM-yyyy"
-                                        valueFormat="yyyy-MM-ddT00:00:00" id="Saving_End">
+                                    <DatePicker displayFormat="dd-MMM-yyyy" editable="true" placeholder="End Date" value="{EndDate}"
+                                        valueFormat="dd-MM-yyyy" id="Saving_End" change="handleChangeEnd">
                                     </DatePicker>
                                       <Label text=""
                                         class="sapMLabelNoText" />
                    <ui:Table
-                id="table_column"
-                rows="{viewInfo>/items}" visible="false" visibleRowCount="5">
+                id="table_column" 
+                rows="{viewInfo>/items}" visible="false" visibleRowCount="4"  selectionMode="None"  >
                 <ui:extension>
                     <OverflowToolbar style="Clear">
                         <ToolbarSpacer />
@@ -86,17 +86,17 @@
                             icon="sap-icon://add"
                             text="Add"
                             type="Accept"
+                            visible="false"
                             press="onCreate"
-                            tooltip="Add New Item"
-                        />
+                            tooltip="Add New Item" />
                        
-                         <Button
+                         <Button enabled="false" id="saveButtonFun"
                             icon="sap-icon://save"
                             text="Save"
                             type="Accept"
+                            visible="false"
                             press="onSaveData"
-                            tooltip="Add New Item"
-                        />
+                            tooltip="Add New Item" />
                     </OverflowToolbar>
                 </ui:extension>
                 <ui:columns>
@@ -167,9 +167,9 @@
                                     </ComboBox>
                                     <Label text=""
                                         class="sapMLabelNoText" />
-                                        <CheckBox text="Savings Distribution"  id="savingdistribution"
-										class="attached" selected="false" select="onClick"   valueState="Success" width="140px" />
-                                    <Input id="po_Savings_Distribution" maxLength="50" visible="false"></Input>
+                                        <CheckBox text="Savings Distribution"  id="savingdistribution" editable="true"
+										class="attached" selected="false" select="onClick"   width="140px" />
+                                    <Input id="po_Savings_Distribution" maxLength="50" enabled="true" visible="true"></Input>
                                      <Label text="BFM Validation" 
                                         class="sapMLabelNoText" />
                                         <Input id="bfmValidation" maxLength="50" value="BFM"></Input>
@@ -182,17 +182,116 @@
                                     
                                 </f:content>
                             </f:SimpleForm>
-
+	<l:VerticalLayout
+		class="sapUiContentPadding"
+		width="100%">
+		<l:content>
+        <OverflowToolbar style="Clear">
+                        <ToolbarSpacer />
+                        <Button id="TriggerWF"
+                            icon="sap-icon://add"
+                            text="Trigger WF"
+                            type="Accept"
+                            visible="true"
+                          
+                            tooltip="Add New Item" />
+                       
+                         
+                    </OverflowToolbar>
+			<List
+				binding=""
+				headerText="Available PO's" >
+                <DisplayListItem
+					label="PO"
+					value="001" />
+                    <DisplayListItem
+					label="PO"
+					value="002" />
+                    <DisplayListItem
+					label="PO"
+					value="003" />
+				
+			</List>
+		</l:content>
+	</l:VerticalLayout>
+    	<Table id="idProductsTable"
+		inset="false"
+		items="">
+        	<headerToolbar>
+        	<OverflowToolbar>
+				    <ToolbarSpacer />
+                        <Button id="TriggerWF2"
+                            icon="sap-icon://add"
+                            text="Trigger WF"
+                            type="Accept"
+                            visible="true"
+                          
+                            tooltip="Add New Item" />
+			</OverflowToolbar>
+            	</headerToolbar>
+		<columns>
+         <Column
+				hAlign="Right">
+				<Text text="VendorName" />
+			</Column>
+			<Column hAlign="Center"
+				>
+				<Text text="PONumber" />
+			</Column>
+			<Column hAlign="Center"
+				>
+				<Text text="Buyer" />
+			</Column>
+			<Column
+				
+				hAlign="Center">
+				<Text text="POValue" />
+			</Column>
+			<Column
+				
+				hAlign="Center">
+				<Text text="POCurrency" />
+			</Column>
+			<Column
+				hAlign="Center">
+				<Text text="Vendor" />
+			</Column>
+            <Column
+				hAlign="Center">
+				<Text text="StartDate" />
+			</Column>
+            <Column
+				hAlign="End">
+				<Text text="EndDate" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem vAlign="Middle">
+				<cells>
+					<ObjectIdentifier
+						title="001001"
+						text="SRV LTD"/>
+					<Text
+						text="1001" />
+					<Text
+						text="00202" />
+					<Text
+						text="1000" />
+					<Text
+						text="sf" />
+                        <Text
+						text="0000001" />
+					<Text
+						text="12-05-2023" />
+                        <Text
+						text="12-05-2024" />
+					
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+    
                         </IconTabFilter>
-                        
-
-                    
-                        
-
-                        
-                        
-
-
                     </items>
                 </IconTabBar>
 
