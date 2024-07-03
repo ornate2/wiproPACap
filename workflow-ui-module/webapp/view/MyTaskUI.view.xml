@@ -6,13 +6,13 @@
     xmlns="sap.m" xmlns:ui="sap.ui.table" >
     
     <App id="app">
-        <Page id="scroll" title="{i18n>title}">
+        <Page id="scroll" title="{i18n>title}" showNavButton="true" navButtonPress="handleNavBack">
             <content>
               <IconTabBar id="DisposalAssetIconTabId"
                     class="sapUiResponsiveContentPadding" select="IconTabBarSelect">
                     <items>
                         <IconTabFilter icon="sap-icon://request" id="data_Form"
-                            text="PO Saving Form" key="PO_Form_Details" tooltip="{i18n>Request}"
+                            text="{i18n>savingForm}" key="PO_Form_Details" tooltip="{i18n>Request}"
                             class="MasterDataIconTabBar" design="Vertical">
                             <f:SimpleForm editable="true" id="form_simple"
                                 layout="ResponsiveGridLayout" labelSpanXL="3" labelSpanL="3"
@@ -23,53 +23,53 @@
                                 <f:content>
                                     <core:Title text="" class="remove-space" />
                                 
-                                    <Label text="Create Saving Form against" required="true"
+                                    <Label text="{i18n>CreateSFA}" required="true"
                                         class="sapMLabelNoText" />
                                     <ComboBox id="Create_Saving" 
                                         change="NewCompanyCodeChange" items="">
                                         <core:Item key="" text="" />
                                     </ComboBox>
-                                    <Label text="Cluster" required="true"
+                                    <Label text="{i18n>Cluster}" required="true"
                                         class="sapMLabelNoText" />
                                         <ComboBox id="Cluster" 
                                         change="NewCompanyCodeChange" items="">
                                         <core:Item key="" text="" />
                                     </ComboBox>
                                     
-                                    <Label text="PO No" required="true"
+                                    <Label text="{i18n>PONO}" required="true"
                                         class="sapMLabelNoText" />
                                     <Input id="AssetTitleId" maxLength="50" value="{PONumber}" editable="true"></Input>
-                                    <Label text="PO Value with Currency" required="true"
+                                    <Label text="{i18n>POVCurr}" required="true"
                                         class="sapMLabelNoText" />
                                     <Input id="Value_Currency" maxLength="50" value="{POValue - POCurrency}"></Input>
-                                        <Label text="Vendor Name" required="true"
+                                        <Label text="{i18n>VendorName}" required="true"
                                         class="sapMLabelNoText" />
                                     <Input id="Vendor_Name" value="{VendorName}" maxLength="50"></Input>
-                                    <Label text="Vendor Code" required="true"
+                                    <Label text="{i18n>VendorCode}" required="true"
                                         class="sapMLabelNoText" />
                                     <Input id="Vendor_Code" maxLength="50" value="{Vendor}"></Input>
-                                    <Label text="Category" required="true"
+                                    <Label text="{i18n>Category}" required="true"
                                         class="sapMLabelNoText" />
                                         <ComboBox id="Category_" 
                                         change="NewCompanyCodeChange" items="">
                                         <core:Item key="" text="" />
                                     </ComboBox>
-                        <Label text="Project Description"
+                        <Label text="{i18n>ProjectDes}"
                                         class="sapMLabelNoText" />
                                     <TextArea id="Description" rows="3.5" maxLength="250"
                                         showExceededText="true" />
                                     
                                     
-                            <Label text="Region" required="true"
+                            <Label text="{i18n>Region}" required="true"
                                         class="sapMLabelNoText" />
                                     <Input id="Region" maxLength="50"></Input>
 
-                                    <Label text="Saving Start Date"
+                                    <Label text="{i18n>Sstartdate}"
                                         class="sapMLabelNoText" />
                                     <DatePicker displayFormat="dd-MMM-yyyy" placeholder="Starting Date" value="{StartDate}"
                                         valueFormat="dd-MM-yyyy" id="Saving_start" change="handleChangeStart">
                                     </DatePicker>
-                                    <Label text="Saving End Date"
+                                    <Label text="{i18n>Senddate}"
                                         class="sapMLabelNoText" />
                                     <DatePicker displayFormat="dd-MMM-yyyy" editable="true" placeholder="End Date" value="{EndDate}"
                                         valueFormat="dd-MM-yyyy" id="Saving_End" change="handleChangeEnd">
@@ -101,7 +101,7 @@
                 </ui:extension>
                 <ui:columns>
                     <ui:Column>
-                        <Label text="Quarter" />
+                        <Label text="{i18n>Quarter}" />
                         <ui:template>
                             <Input
                                 value="{viewInfo>quarter}"
@@ -111,7 +111,7 @@
                         </ui:template>
                     </ui:Column>
                     <ui:Column>
-                        <Label text="Saving" />
+                        <Label text="{i18n>Saving}" />
                         <ui:template>
                             <Input
                                 value="{viewInfo>price}"
@@ -126,40 +126,40 @@
                                     <core:Title text="" class="remove-space" />
 
                                     
-                            <Label text="Last Year PO No"
+                            <Label text="{i18n>LastYPONO}"
                                         class="sapMLabelNoText" />
                                     <Input id="po_no" maxLength="50"></Input>
-                                        <Label text="Last Year PO Value" 
+                                        <Label text="{i18n>LastYPOValue}" 
                                         class="sapMLabelNoText" />
                                     <Input id="po_value" maxLength="50"></Input>
-                                    <Label text="Last Year PO Currency" 
+                                    <Label text="{i18n>LastYPOCurr}" 
                                         class="sapMLabelNoText" />
                                     <Input id="po_Currency" maxLength="50"></Input>
 
-                                        <Label text="Attachment" 
+                                        <Label text="{i18n>Attachment}" 
                                         class="sapMLabelNoText" />
                                     <Input id="Attachment" maxLength="50"></Input>
 
-                            <Label text="Quated Value"
+                            <Label text="{i18n>Qvalue}"
                                         class="sapMLabelNoText" />
                                         <Input id="Quated" maxLength="50"></Input>
                                     
-                            <Label text="Currency" required="true"
+                            <Label text="{i18n>Currency}" required="true"
                                         class="sapMLabelNoText" />
                                         <ComboBox id="Currency_po" 
-                                        change="NewCompanyCodeChange" items="">
-                                        <core:Item key="INR" text="INR" />
+                                        change="NewCompanyCodeChange" items="{/}">
+                                        <core:Item key="{POCurrency}" text="{POCurrency}" />
                                     </ComboBox>
-                                    <Label text="Order Value"
+                                    <Label text="{i18n>OValue}"
                                         class="sapMLabelNoText" /> <Input id="Order_Value" maxLength="50"></Input>
                                     
-                                        <Label text="Savings" 
+                                        <Label text="{i18n>Savings}" 
                                         class="sapMLabelNoText" />
                                     <Input id="po_Savings" maxLength="50"></Input>
-                                    <Label text="Savings(%)" 
+                                    <Label text="{i18n>SavingsPer}" 
                                         class="sapMLabelNoText" />
                                     <Input id="po_Savings_auto" maxLength="50"></Input>
-                                    <Label text="Saving Type" 
+                                    <Label text="{i18n>SavingType}" 
                                         class="sapMLabelNoText" />
                                         <ComboBox id="saving_type" 
                                         change="NewCompanyCodeChange" items="">
@@ -167,131 +167,19 @@
                                     </ComboBox>
                                     <Label text=""
                                         class="sapMLabelNoText" />
-                                        <CheckBox text="Savings Distribution"  id="savingdistribution" editable="true"
+                                        <CheckBox text="{i18n>SavingDistribution}"  id="savingdistribution" editable="true"
 										class="attached" selected="false" select="onClick"   width="140px" />
                                     <Input id="po_Savings_Distribution" maxLength="50" enabled="true" visible="true"></Input>
-                                     <Label text="BFM Validation" 
+                                     <Label text="{i18n>BFMValid}" 
                                         class="sapMLabelNoText" />
                                         <Input id="bfmValidation" maxLength="50" value="BFM"></Input>
                                    
-                                        <Label text="YOY Saving-Function BFM Approval" required="true"
+                                        <Label text="{i18n>YOYSav}" required="true"
                                         class="sapMLabelNoText" />
                                         <Input id="Saving-Function" maxLength="50"></Input>
-                                         
-                                        
-                                    
-                                </f:content>
+                                  </f:content>
                             </f:SimpleForm>
-	<l:VerticalLayout
-		class="sapUiContentPadding"
-		width="100%">
-		<l:content>
-        <OverflowToolbar style="Clear">
-                        <ToolbarSpacer />
-                        <Button id="TriggerWF"
-                            icon="sap-icon://add"
-                            text="Trigger WF"
-                            type="Accept"
-                            visible="true"
-                          
-                            tooltip="Add New Item" />
-                       
-                         
-                    </OverflowToolbar>
-			<List
-				binding=""
-				headerText="Available PO's" >
-                <DisplayListItem
-					label="PO"
-					value="001" />
-                    <DisplayListItem
-					label="PO"
-					value="002" />
-                    <DisplayListItem
-					label="PO"
-					value="003" />
-				
-			</List>
-		</l:content>
-	</l:VerticalLayout>
-    	<Table id="idProductsTable"
-		inset="false"
-		items="">
-        	<headerToolbar>
-        	<OverflowToolbar>
-				    <ToolbarSpacer />
-                        <Button id="TriggerWF2"
-                            icon="sap-icon://add"
-                            text="Trigger WF"
-                            type="Accept"
-                            visible="true"
-                          
-                            tooltip="Add New Item" />
-			</OverflowToolbar>
-            	</headerToolbar>
-		<columns>
-         <Column
-				hAlign="Right">
-				<Text text="VendorName" />
-			</Column>
-			<Column hAlign="Center"
-				>
-				<Text text="PONumber" />
-			</Column>
-			<Column hAlign="Center"
-				>
-				<Text text="Buyer" />
-			</Column>
-			<Column
-				
-				hAlign="Center">
-				<Text text="POValue" />
-			</Column>
-			<Column
-				
-				hAlign="Center">
-				<Text text="POCurrency" />
-			</Column>
-			<Column
-				hAlign="Center">
-				<Text text="Vendor" />
-			</Column>
-            <Column
-				hAlign="Center">
-				<Text text="StartDate" />
-			</Column>
-            <Column
-				hAlign="End">
-				<Text text="EndDate" />
-			</Column>
-		</columns>
-		<items>
-			<ColumnListItem vAlign="Middle">
-				<cells>
-					<ObjectIdentifier
-						title="001001"
-						text="SRV LTD"/>
-					<Text
-						text="1001" />
-					<Text
-						text="00202" />
-					<Text
-						text="1000" />
-					<Text
-						text="sf" />
-                        <Text
-						text="0000001" />
-					<Text
-						text="12-05-2023" />
-                        <Text
-						text="12-05-2024" />
-					
-				</cells>
-			</ColumnListItem>
-		</items>
-	</Table>
-    
-                        </IconTabFilter>
+	                </IconTabFilter>
                     </items>
                 </IconTabBar>
 

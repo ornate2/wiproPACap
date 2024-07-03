@@ -304,4 +304,7 @@ margin-top: 1rem !important;
      color: black;
      text-decoration: none;
 }
+:not(.sapMBtnDisabled) .sapMBtnBack>.sapMBtnIcon, :not(.sapMBtnDisabled) .sapMBtnTransparent>.sapMBtnIcon, :not(.sapMBtnDisabled) .sapMBtnGhost>.sapMBtnIcon{
+    color: white;
+}
 
