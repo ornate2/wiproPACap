@@ -87,29 +87,26 @@
                 "routerClass": "sap.m.routing.Router",
                 "viewType": "XML",
                 "async": true,
-                "viewPath": "wipro.workflowuimodule.view",
+                "viewPath": "wiprofrm.workflowuimodule.view",
                 "controlAggregation": "pages",
                 "controlId": "app",
-                "clearControlAggregation": false
+                "clearControlAggregation": false,
+                "clearTarget": false
             },
             "routes": [
                 {
-                    "name": "RouteMyTaskUI",
-                    "pattern": ":?query:",
-                    "target": [
-                        "TargetMyTaskUI"
-                    ]
+                    "name": "List",
+                    "pattern": "",
+                    "view":"List"
+                },
+                {
+                    "name": "MyTaskUI",
+                    "pattern": "MyTaskUI/{id}",
+                    "view":"MyTaskUI"
+            
                 }
-            ],
-            "targets": {
-                "TargetMyTaskUI": {
-                    "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "MyTaskUI",
-                    "viewName": "MyTaskUI"
-                }
-            }
+            ]
+          
         },
         "rootView": {
             "viewName": "wipro.workflowuimodule.view.App",

@@ -51,7 +51,7 @@
 // });
 
 const cds = require('@sap/cds');
-const { fetchOData } = require('./controller/FetchOData');
+const { fetchOData } = require('./controller/Fetchdata');
 const { triggerWorkflow } = require('./controller/TriggerWorkflow');
 const { updateSAP } = require('./controller/UpdateSAP');
 const { submitFilledForm } = require('./controller/SubmitFilledForm');

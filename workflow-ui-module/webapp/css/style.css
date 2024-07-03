@@ -5,7 +5,9 @@
 .stretchTabBar .sapMITBText {
     text-align: center !important;
 }
-
+.sapMTableScroll {
+    overflow: hidden !important;
+  }
 .longTextClass {
     color: orange !important;
 }
@@ -21,6 +23,9 @@
 }
 .wrapper .sapMDialogScrollCont{
     text-align : center !important;
+}
+.sapUiTableVSb{
+    display: none !important;
 }
 .sapMBarPH {
     display: inline-flex !important;
@@ -298,5 +303,8 @@ margin-top: 1rem !important;
      font-size: 1.1rem!important;
      color: black;
      text-decoration: none;
+}
+:not(.sapMBtnDisabled) .sapMBtnBack>.sapMBtnIcon, :not(.sapMBtnDisabled) .sapMBtnTransparent>.sapMBtnIcon, :not(.sapMBtnDisabled) .sapMBtnGhost>.sapMBtnIcon{
+    color: white;
 }
 
