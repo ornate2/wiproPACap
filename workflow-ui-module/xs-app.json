@@ -10,6 +10,7 @@
       "csrfProtection": true,
       "authenticationType": "xsuaa"
     },
+   
     {
       "source": "^/bpmworkflowruntime/(.*)$",
       "target": "/public/workflow/rest/$1",
@@ -17,6 +18,14 @@
       "endpoint": "api",
       "authenticationType": "xsuaa"
     },
+    
+    {
+      "source": "^/sap/opu/odata/sap/(.*)$",
+      "destination": "WS1",
+      "authenticationType": "xsuaa",
+      "csrfProtection": false
+    },    
+    
     {
       "source": "^/sap/(.*)$",
       "target": "/sap/$1",
@@ -42,5 +51,6 @@
       "service": "html5-apps-repo-rt",
       "authenticationType": "xsuaa"
     }
+   
   ]
 }

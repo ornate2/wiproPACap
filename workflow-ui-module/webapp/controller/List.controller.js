@@ -10,13 +10,13 @@ sap.ui.define([
 
         return Controller.extend("wipro.workflowuimodule.controller.List", {
             onInit: function () {
-            this.getView().setModel(models.createviewInfoModel(), "viewInfo")
+           // this.getView().setModel(models.createviewInfoModel(), "viewInfo")
             // var oModel = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZMM_PO_SAVING_SRV/", true );
                 
             // // Set model to view
             // this.getView().setModel(oModel);
            
-            this.onReadPoData();
+           // this.onReadPoData();
 
            },
            onReadPoData: function(){
@@ -53,7 +53,7 @@ sap.ui.define([
                     "EndDate": oData.EndDate
                     
                 }
-              
+                
                 var sUrl = "/sap/opu/odata/sap/ZMM_PO_SAVING_SRV/";
                     $.ajax({
                         url: sUrl,

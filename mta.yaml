@@ -7,7 +7,6 @@ modules:
   type: nodejs
   path: gen/srv
   requires:
-  - name: wipro-db
   - name: uaa_wipro
   provides:
   - name: srv-api
@@ -19,13 +18,6 @@ modules:
     readiness-health-check-type: http
   build-parameters:
     builder: npm
-- name: wipro-db-deployer
-  type: hdb
-  path: gen/db
-  requires:
-  - name: wipro-db
-  parameters:
-    buildpack: nodejs_buildpack
 - name: wipro-destination-content
   type: com.sap.application.content
   requires:
@@ -94,12 +86,18 @@ modules:
     - npm install
     - npm run build:cf
     supported-platforms: []
+- name: workflow-module
+  type: com.sap.application.content
+  path: workflow-module
+  requires:
+  - name: sap_processautomation
+    parameters:
+      content-target: true
+      service-key:
+        config:
+          deployUsageScenario: workflow
+        name: spa-workflow-service-key
 resources:
-- name: wipro-db
-  type: com.sap.xs.hdi-container
-  parameters:
-    service: hana
-    service-plan: hdi-shared
 - name: wipro-destination-service
   type: org.cloudfoundry.managed-service
   parameters:
@@ -133,6 +131,11 @@ resources:
     service: xsuaa
     service-name: wipro-xsuaa-service
     service-plan: application
+- name: sap_processautomation
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: process-automation-service
+    service-plan: standard
 parameters:
   deploy_mode: html5-repo
   enable-parallel-deployments: true

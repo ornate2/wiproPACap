@@ -17,7 +17,7 @@
         },
         "dataSources": {
             "mainService": {
-                "uri": "/sap/opu/odata/",
+                "uri": "/sap/opu/odata/sap/ZMM_PO_SAVING_SRV/",
                 "type": "OData",
                 "settings": {
                     "annotations": [],
@@ -121,122 +121,6 @@
     },
     "sap.bpa.task": {
         "_version": "1.0.0",
-        "inputs": {
-            "$schema": "http://json-schema.org/draft-07/schema",
-            "title": "input",
-            "type": "object",
-            "properties": {
-                "CreatingSavingForagainst": {
-                    "type": "string",
-                    "title": "Creating a saving for against"
-                },
-                "Cluster": {
-                    "type": "string",
-                    "title": "Cluster"
-                },
-                "PONumber": {
-                    "type": "string",
-                    "title": "PO Number"
-                },
-                "POValueWithCurrency": {
-                    "type": "string",
-                    "title": "PO Value with Currency"
-                },
-                "VendorName": {
-                    "type": "string",
-                    "title": "Vendor Name"
-                },
-                "VendorCode": {
-                    "type": "string",
-                    "title": "Vendor Code"
-                },
-                "Category": {
-                    "type": "string",
-                    "title": "Category"
-                },
-                "ProjectDescription": {
-                    "type": "string",
-                    "title": "Project Description"
-                },
-                "Region": {
-                    "type": "string",
-                    "title": "Region"
-                },
-                "SavingStartDate": {
-                    "type": "string",
-                    "format": "date",
-                    "title": "Saving Start Date"
-                },
-                "SavingEndDate": {
-                    "type": "string",
-                    "format": "date",
-                    "title": "Saving End Date"
-                },
-                "LastYearPONo": {
-                    "type": "string",
-                    "title": "Last Year PO No."
-                },
-                "LastYearPOValue": {
-                    "type": "string",
-                    "title": "Last Year PO Value"
-                },
-                "LastYearPOCurrency": {
-                    "type": "string",
-                    "title": "Last Year PO Currency"
-                },
-                "Attachment": {
-                    "type": "string",
-                    "title": "Attachment"
-                },
-                "QuotedValuePrevPeriodSpend": {
-                    "type": "string",
-                    "title": "Quoted Value/Prev Period Spend"
-                },
-                "Currency": {
-                    "type": "string",
-                    "title": "Currency"
-                },
-                "OrderValueRevisedSpendInUSD": {
-                    "type": "string",
-                    "title": "Order Value/Revised Spend In USD"
-                },
-                "Savings": {
-                    "type": "boolean",
-                    "title": "Savings"
-                },
-                "SavingsPercentage": {
-                    "type": "string",
-                    "title": "Savings (%)"
-                },
-                "SavingType": {
-                    "type": "string",
-                    "title": "Saving Type"
-                },
-                "SavingDistributionAcrossQtrs": {
-                    "type": "string",
-                    "title": "Saving Distribution across Qtrs"
-                },
-                "BMFValidation": {
-                    "type": "string",
-                    "title": "BMF Validation"
-                },
-                "YOYSavingFunctionBMApproval": {
-                    "type": "string",
-                    "title": "YOY Saving - function BMF Approval"
-                }
-            }
-        },
-        "outputs": {
-            "$schema": "http://json-schema.org/draft-07/schema",
-            "title": "output",
-            "type": "object",
-            "properties": {
-                "comment": {
-                    "type": "string",
-                    "title": "Comment"
-                }
-            }
-        },
         "outcomes": [
             {
                 "id": "approve",
@@ -247,6 +131,66 @@
                 "label": "Reject"
             }
         ],
+        "inputs": {
+            "$schema": "http://json-schema.org/draft-07/schema",
+            "title": "input",
+            "type": "object",
+            "required": [
+                "customerName",
+                "orderNumber",
+                "orderAmount",
+                "orderDate",
+                "expectedDeliveryDate",
+                "shippingCountry"
+            ],
+            "properties": {
+                "customerName": {
+                    "type": "string",
+                    "title": "Customer Name",
+                    "description": "Customer Name"
+                },
+                "orderNumber": {
+                    "type": "string",
+                    "title": "Order Number",
+                    "description": "Order Number"
+                },
+                "orderAmount": {
+                    "type": "number",
+                    "title": "Order Amount",
+                    "description": "Order Amount"
+                },
+                "orderDate": {
+                    "type": "string",
+                    "title": "Order Date",
+                    "description": "Order Date"
+                },
+                "expectedDeliveryDate": {
+                    "type": "string",
+                    "title": "Expected Delivery Date",
+                    "description": "End Date of the Vacation"
+                },
+                "shippingCountry": {
+                    "type": "string",
+                    "title": "Shipping Country",
+                    "description": "Shipping Country"
+                }
+            }
+        },
+        "outputs": {
+            "$schema": "http://json-schema.org/draft-07/schema",
+            "title": "output",
+            "type": "object",
+            "required": [
+                "comment"
+            ],
+            "properties": {
+                "comment": {
+                    "type": "string",
+                    "title": "Comment",
+                    "description": "Comment to buyer"
+                }
+            }
+        },
         "category": "approval"
     }
 

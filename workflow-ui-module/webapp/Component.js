@@ -1,9 +1,9 @@
 sap.ui.define([
   "sap/ui/core/UIComponent",
   "sap/ui/Device",
-  "wiprofrm/workflowuimodule/model/models",
-  "sap/m/routing/RouteMatchedHandler"
-], function (UIComponent, Device, models, RouteMatchedHandler) {
+  "wipro/workflowuimodule/model/models"
+//   "sap/m/routing/RouteMatchedHandler"
+], function (UIComponent, Device, models) {
   "use strict";
 
   return UIComponent.extend("wipro.workflowuimodule.Component", {
@@ -21,10 +21,11 @@ sap.ui.define([
           UIComponent.prototype.init.apply(this, arguments);
 
           // enable routing
-         // this.getRouter().initialize();
-          var oRouter = this.getRouter();
-          this.routeHandle = new RouteMatchedHandler(oRouter);
-          oRouter.initialize();
+           this.getRouter().initialize();
+         
+        //   var oRouter = this.getRouter();
+        //   this.routeHandle = new RouteMatchedHandler(oRouter);
+        //   oRouter.initialize();
 
           // set the device model
           this.setModel(models.createDeviceModel(), "device");
