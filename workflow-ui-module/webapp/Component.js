@@ -1,7 +1,7 @@
 sap.ui.define([
   "sap/ui/core/UIComponent",
   "sap/ui/Device",
-  "wipro/workflowuimodule/model/models"
+  "wipro/workflowuimodule/model/models",
 //   "sap/m/routing/RouteMatchedHandler"
 ], function (UIComponent, Device, models) {
   "use strict";
